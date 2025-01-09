@@ -10,8 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Create library target
 add_library(LocalMinReverseCommunication INTERFACE)
 target_include_directories(LocalMinReverseCommunication INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>>")
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 # Create tests executable
 if(BUILD_TESTING)
@@ -39,8 +39,7 @@ endif()
 install(DIRECTORY "include/"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 install(TARGETS LocalMinReverseCommunication
-    EXPORT LocalMinReverseCommunicationTargets
-    INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+    EXPORT LocalMinReverseCommunicationTargets)
 install(EXPORT LocalMinReverseCommunicationTargets
     FILE "LocalMinReverseCommunicationConfig.cmake"
     NAMESPACE "LocalMinReverseCommunication::"

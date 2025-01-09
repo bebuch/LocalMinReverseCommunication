@@ -19,7 +19,7 @@ FetchContent_Declare(
     GIT_TAG        "v1.15.2")
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(googletest)
-set(INSTALL_GTEST OFF)
+set(INSTALL_GTEST OFF CACHE BOOL "Disable installation of GTest" FORCE)
 
 # Create tests executable
 enable_testing()

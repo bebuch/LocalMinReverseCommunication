@@ -1,18 +1,18 @@
 #include <gtest/gtest.h>
 #include <cmath>
-#include "local_min_rc.hpp"
+#include "LocalMinReverseCommunication.hpp"
 
 TEST(LocalMinRCTest, MinimizesQuadraticFunction) {
     double a = 0.0;
     double b = 5.0;
-    int status = 0;
     double value = 0.0;
     double arg = 0.0;
 
     // Iteratively call local_min_rc until status == 0.
+    LocalMinReverseCommunication local_min_rc{a, b};
     while (true) {
-        arg = local_min_rc(a, b, status, value);
-        if (status == 0) {
+        arg = local_min_rc(value);
+        if (local_min_rc.IsReady()) {
             break;
         }
         value = (arg - 2.0) * (arg - 2.0);
@@ -25,13 +25,13 @@ TEST(LocalMinRCTest, MinimizesQuadraticFunction) {
 TEST(LocalMinRCTest, MinimizesCosFunction) {
     double a = 0.0;
     double b = 6.28; // 2*pi
-    int status = 0;
     double value = 0.0;
     double arg = 0.0;
 
+    LocalMinReverseCommunication local_min_rc{a, b};
     while (true) {
-        arg = local_min_rc(a, b, status, value);
-        if (status == 0) {
+        arg = local_min_rc(value);
+        if (local_min_rc.IsReady()) {
             break;
         }
         value = std::cos(arg);
